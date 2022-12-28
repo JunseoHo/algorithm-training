@@ -7,37 +7,31 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         int T = Integer.parseInt(br.readLine());
-        for (int i = 0; i < T; i++) bw.write(discriminate(br.readLine()) + "\n");
+        for (int i = 0; i < T; i++) bw.write(s1(br.readLine()) + "\n");
         br.close();
         bw.close();
     }
 
-    public static String discriminate(String wave) {
-        while (wave.length() != 0) {
-            if (wave.startsWith("100")) {
-                wave = wave.substring(3);
-                while (wave.startsWith("0")) {
-                    if (wave.length() > 1) wave = wave.substring(1);
-                    else wave = "";
-                }
-                boolean isCompleted = false;
-                while (wave.startsWith("1")) {
-                    if (isCompleted && (wave.startsWith("100") || wave.startsWith("01"))) {
-                        break;
-                    } else {
-                        if (wave.length() > 1) wave = wave.substring(1);
-                        else wave = "";
-                    }
-                    isCompleted = true;
-                }
-                if (!isCompleted) return "NO";
-            } else if (wave.startsWith("01")) {
-                if (wave.length() == 2) wave = "";
-                else wave = wave.substring(2);
-            } else {
-                return "NO";
-            }
-        }
-        return "YES";
+    public static String s1(String wave) {
+        if (wave.length() == 0) return "YES";
+        if (wave.startsWith("100")) return s2(wave.substring(3));
+        if (wave.startsWith("01")) return s1(wave.substring(2));
+        return "NO";
     }
+
+
+    public static String s2(String wave) {
+        if (wave.startsWith("0")) return s2(wave.substring(1));
+        if (wave.startsWith("1")) return s3(wave.substring(1));
+        return "NO";
+    }
+
+    public static String s3(String wave) {
+        if (wave.length() == 0) return s1(wave);
+        if (wave.startsWith("100")) return s2(wave.substring(3));
+        if (wave.startsWith("01")) return s1(wave.substring(2));
+        if (wave.startsWith("1")) return s3(wave.substring(1));
+        return "NO";
+    }
+
 }
