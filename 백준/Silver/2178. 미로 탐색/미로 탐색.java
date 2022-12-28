@@ -11,7 +11,6 @@ public class Main {
 
     public static void main(String[] args) throws IOException {
         // read graph
-        int answer = 0;
         String line = br.readLine();
         StringTokenizer tokenizer = new StringTokenizer(line);
         int N = Integer.parseInt(tokenizer.nextToken());
