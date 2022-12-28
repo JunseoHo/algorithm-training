@@ -25,9 +25,7 @@ public class Main {
         }
         findPath(0, 0);
         // print result
-       
         System.out.println(matrix[N - 1][M - 1]);
-//        bw.write(matrix[N - 1][M - 1]);
         br.close();
         bw.close();
     }
