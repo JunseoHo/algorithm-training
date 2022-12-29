@@ -26,38 +26,18 @@ public class Main {
 
     public static int reverse(int[][] matrix, int count) {
         List<int[]> reversed = new LinkedList<>();
-        for (int i = 0; i < N; i++) {
+        for (int i = 0; i < N; i++)
             for (int j = 0; j < M; j++)
                 if (matrix[i][j] == 1) reversed.add(new int[]{i, j});
-        }
         if (reversed.size() == 0) return count;
         else {
-            int maxRow = 0;
-            int maxCol = 0;
-            int[] maxCo = {maxRow, maxCol};
-            for (int[] co : reversed)
-                if (co[0] >= maxRow && co[1] >= maxCol) {
-                    maxCo = co;
-                }
-//            int reversible = 0;
-//            int idx = 0;
-//            for (int i = 0; i < reversed.size(); i++) {
-//                int[] co = reversed.get(i);
-//                int rev = 0;
-//                for (int j = 0; j < reversed.size(); j++) {
-//
-//                    if (co[0] >= reversed.get(j)[0] && co[1] >= reversed.get(j)[1]) {
-//                        rev++;
-//                    }
-//                }
-//                if (rev > reversible) {
-//                    reversible = rev;
-//                    idx = i;
-//                }
-//            }
-            for (int i = 0; i <= maxCo[0]; i++)
-                for (int j = 0; j <= maxCo[1]; j++)
-                    matrix[i][j] = matrix[i][j] == 0 ? 1 : 0;
+            int row = 0;
+            int col = 0;
+            int[] mostReversible = {row, col};
+            for (int[] rev : reversed)
+                if (rev[0] >= row && rev[1] >= col) mostReversible = rev;
+            for (int i = 0; i <= mostReversible[0]; i++)
+                for (int j = 0; j <= mostReversible[1]; j++) matrix[i][j] = matrix[i][j] == 0 ? 1 : 0;
             return reverse(matrix, count + 1);
         }
     }
